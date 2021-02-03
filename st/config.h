@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "WenQuanYi Zen Hei", "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
+static char *font = "mono:pixelsize=13:antialias=true:autohint=true";
+static char *font2[] = { "wqy-zenhei:pixelsize=13", "JoyPixels:pixelsize=13:antialias=true:autohint=true" };
 static int borderpx = 2;
 
 /*
@@ -130,23 +130,24 @@ static const char *colorname[] = {
 	//"#d3869b",			//pale pink
 	//"#8ec07c",			//pale green
 	//"#ebdbb2",			//white yellow
-	  "#000000",
-	  "#ff0000",
-	  "#38de21",
-	  "#ffe50a",
-	  "#1460d2",
-	  "#ff005d",
-	  "#00bbbb",
-	  "#bbbbbb",
 
-	  "#555555",
-	  "#f40e17",
-	  "#3bd01d",
-	  "#edc809",
-	  "#5555ff",
-	  "#ff55ff",
-	  "#6ae3fa",
-	  "#ffffff",
+	  "#333333",
+	  "#ff3300",
+	  "#38cc21",
+	  "#e0d00a",
+	  "#1480ff",
+	  "#ff00aa",
+	  "#00ccff",
+	  "#cccc64",
+
+	  "#666644",
+	  "#ff6633",
+	  "#11ee11",
+	  "#ffdd00",
+	  "#5599ff",
+	  "#ff66ff",
+	  "#00eeff",
+	  "#ffffdd",
 	[255] = 0,
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#add8e6", /* 256 -> cursor */
@@ -270,11 +271,11 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
 	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
 	{ MODKEY,               XK_Home,        zoomreset,      {.f =  0} },
-	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
-	{ ControlMask|ShiftMask,   XK_c,        clipcopy,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
-	{ ControlMask|ShiftMask,   XK_V,        clippaste,      {.i =  0} },
+	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
 	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
+	{ ControlMask|ShiftMask,XK_c,           clipcopy,        {.i =  0} },
+	{ ControlMask|ShiftMask,XK_v,           selpaste,       {.i =  0} },
 	{ XK_ANY_MOD,			Button2,		selpaste,		{.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
 	{ MODKEY,               XK_Control_L,   iso14755,       {.i =  0} },

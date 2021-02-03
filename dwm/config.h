@@ -2,8 +2,11 @@
 
 /* Constants */
 #include <X11/X.h>
-#define TERMINAL "xterm"
-#define TERMCLASS "xterm"
+//primary terminal
+#define TERMINAL   "st"
+#define TERMCLASS  "st"
+//backup
+#define TERMINAL2  "rxvt-unicode"
 
 
 /* appearance */
@@ -17,7 +20,7 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "mono:pixelsize=14:antialias=true:autohint=true", "WenQuanYi Zen Hei Mono", "JoyPixels:pixelsize=10:antialias=true:autohint=true", "FreeMono:style=Bold Oblique"};
+static char *fonts[]          = { "mono:pixelsize=12:antialias=true:autohint=true", "WenQuanYi Zen Hei Mono", "JoyPixels:pixelsize=12:antialias=true:autohint=true", "FreeMono:style=Bold Oblique"};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -42,6 +45,7 @@ typedef struct {
 
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -109,6 +113,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *termcmd2[] = { TERMINAL2, NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -185,9 +190,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_s,		togglesticky,	{0} },			/*shows up in every window*/
 	{ MODKEY|ShiftMask,			XK_s,		spawn,	SHCMD("scrot -b '%Y:%m:%d:%H:%M:%S.png' -e 'mv $f ~'") },			/*shows up in every window*/
 
-	{ MODKEY,			XK_Print,		spawn,	SHCMD("gnome-screenshot") },			
-	{ MODKEY|ShiftMask,			XK_Print,		spawn,	SHCMD("gnome-screenshot -a") },			
-	/*{ MODKEY|ShiftMask,			XK_Print,		spawn,	NULL}*/
+	{ MODKEY,							XK_Print,		spawn,	SHCMD("gnome-screenshot") },			
+	{ MODKEY|ShiftMask,					XK_Print,		spawn,	SHCMD("gnome-screenshot -a") },			
+	{ MODKEY|ShiftMask|ControlMask,		XK_Print,		spawn,	SHCMD("flameshot gui") },			
 
 	/*system*/
 	{ MODKEY,			XK_q,		killclient,	{0} },
@@ -207,9 +212,9 @@ static Key keys[] = {
 //	{ 0,							XF86XK_AudioLowerVolume, spawn,         SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -10%")},
 //	{ 0,                            XF86XK_AudioRaiseVolume, spawn,         SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +10%") },
 //	{ 0,                            XF86XK_AudioMute,		 spawn,         SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
-	{ MODKEY,                            XK_F3,		 spawn,         SHCMD("cmus-remote -n") },
-	{ MODKEY,                            XK_F2,		 spawn,         SHCMD("cmus-remote -r") },
-	{ MODKEY,                            XK_F1,				 spawn,         SHCMD("cmus-remote -u") },
+	{ MODKEY,                            XK_F3,		 spawn,         SHCMD("cmus-remote -n; mocp -f") },		//next
+	{ MODKEY,                            XK_F2,		 spawn,         SHCMD("cmus-remote -r; mocp -r") },		//prev
+	{ MODKEY,                            XK_F1,				 spawn,         SHCMD("cmus-remote -u; mocp -G") },		//toggle stop
 //	{ 0,                            XF86XK_MonBrightnessUp,		 spawn,         SHCMD("ybacklight -inc 5") },
 //	{ 0,                            XF86XK_MonBrightnessDown,		 spawn,         SHCMD("ybacklight -dec 5") },
 	//// not testest if failed, try static const char *brupcmd[] = { "brightnessctl", "set", "10%+", NULL };
@@ -252,8 +257,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
 	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
-	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
+	{ MODKEY,				XK_Return,	spawn,			{.v = termcmd } },
+	{ MODKEY|ShiftMask,		XK_Return,	spawn,			{.v = termcmd2} },
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +5 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -5 } },
