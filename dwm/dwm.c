@@ -1567,9 +1567,22 @@ run(void)
 			handler[ev.type](&ev); /* call handler */
 }
 
+void view_win(int i){
+	selmon->seltags ^= 1; /* toggle sel tagset */
+	if (1<<i & TAGMASK)
+		selmon->tagset[selmon->seltags] = 1<<i & TAGMASK;
+	focus(NULL);
+	arrange(selmon);
+}
+
 void
 runAutostart(void) {
 	//no dwmblocks auto start
+    //start tray on monitor 9
+    //view_win(9);
+    //int ret = system("trayer");
+    //ret = system("megasync");
+    //view_win(1);
 	//int returnVal = system("killall -q dwmblocks; dwmblocks &");
 	//if(returnVal != 0) return;
 }

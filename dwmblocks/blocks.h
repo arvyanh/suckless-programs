@@ -3,8 +3,7 @@
 //pkill dwmblocks -RTMIN+n
 static Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
-	{"", "dwmblk-rss.sh",						60,		7},
-	{"", "dwmblk-todo.sh",						20,		8},
+	//{"", "dwmblk-todo.sh",						20,		8},
 	{"", "dwmblk-sys-monitor.sh",				5,		6},
 	{"", "dwmblk-music.sh",						5,		5},
 

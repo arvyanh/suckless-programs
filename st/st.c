@@ -3,8 +3,8 @@
 #define _POSIX_C_SOURCE 20201212L
 #define _BSD_SOURCE 1
 
-/* See LICENSE for license details. */
-#include <ctype.h>
+/* See LICENSE for license details. */ 
+#include <ctype.h> 
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>

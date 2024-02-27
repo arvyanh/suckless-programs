@@ -3,10 +3,10 @@
 /* Constants */
 #include <X11/X.h>
 //primary terminal
-#define TERMINAL   "alacritty"
-#define TERMCLASS  "alacritty"
+#define TERMINAL   "terminator"
+#define TERMCLASS  "terminator"
 //backup
-#define TERMINAL2  "st"
+#define TERMINAL2  "alacritty"
 //#define TERMINAL2  "rxvt-unicode"
 
 
@@ -21,7 +21,7 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "mono:pixelsize=12:antialias=true:autohint=true", "WenQuanYi Zen Hei Mono", "JoyPixels:pixelsize=12:antialias=true:autohint=true", "FreeMono:style=Bold Oblique"};
+static char *fonts[]          = { "mono:pixelsize=13:antialias=true:autohint=true", "WenQuanYi Zen Hei Mono", "JoyPixels:pixelsize=12:antialias=true:autohint=true", "FreeMono:style=Bold Oblique"};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -114,8 +114,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
-static const char *termcmd2[] = { TERMINAL, "-e", "tmux", "new-session", "-A", "-s", "dwm_default_tmux", NULL };
-static const char *termcmd3[] = { TERMINAL2, NULL };
+static const char *termcmd2[] = { TERMINAL2, NULL };
+static const char *termcmd3[] = { TERMINAL, "-e", "tmux", "new-session", "-A", "-s", "dwm_default_tmux", NULL };
 
 /*
  * Xresources preferences to load at startup
